@@ -22,6 +22,7 @@ import es.usj.androidapps.alu95669.chatapp.DataModels.Message
 import es.usj.androidapps.alu95669.chatapp.DataModels.User
 import es.usj.androidapps.alu95669.chatapp.DataModels.UserAdapter
 import java.text.SimpleDateFormat
+import java.time.LocalTime
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -35,6 +36,7 @@ class Chat: AppCompatActivity() {
     private lateinit var messageList: ArrayList<Message>
 
     private lateinit var dbRef: DatabaseReference
+    private lateinit var mAuth: FirebaseAuth
 
     private val llm = LinearLayoutManager(this)
 
@@ -45,6 +47,8 @@ class Chat: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_room)
 
+        var ts = FirebaseAuth.getInstance().currentUser?.metadata?.lastSignInTimestamp!!
+        mAuth = FirebaseAuth.getInstance()
 
         dbRef = FirebaseDatabase.getInstance().reference
 
@@ -104,6 +108,10 @@ class Chat: AppCompatActivity() {
                             .setValue(messageObject)
                     }
                 messageBox.setText("")
+                val currentTime = System.currentTimeMillis()
+                //I refresh the last connected time of the user in firebase
+                dbRef.child("user").child(mAuth.currentUser?.uid!!)
+                    .child("lastTimeConnected").setValue(currentTime)
             }
         }
     }
