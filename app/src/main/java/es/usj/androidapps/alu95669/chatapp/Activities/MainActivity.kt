@@ -31,8 +31,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var ts = FirebaseAuth.getInstance().currentUser?.metadata?.lastSignInTimestamp!!
-        var date  = Date(ts)
-        title = date.toLocaleString()
+        title = "Chats"
 
         mAuth = FirebaseAuth.getInstance()
         userDBRef = FirebaseDatabase.getInstance().reference

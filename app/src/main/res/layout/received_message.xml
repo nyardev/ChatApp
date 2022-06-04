@@ -10,15 +10,35 @@
         android:background="@drawable/border_message"
         android:backgroundTint="@color/app_blue"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp">
 
-        <TextView
-            android:id="@+id/tvReceivedMessage"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="this is received message"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:weightSum="1"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvReceivedMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="this is sent message"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_weight="0.9" />
+            <TextView
+                android:id="@+id/tvSentTimeR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="This is the sentTime"
+                android:layout_gravity="start"
+                android:layout_weight="0.1"
+                android:textSize="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>

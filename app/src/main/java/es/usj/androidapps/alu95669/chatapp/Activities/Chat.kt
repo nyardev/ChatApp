@@ -21,6 +21,7 @@ import es.usj.androidapps.alu95669.chatapp.R
 import es.usj.androidapps.alu95669.chatapp.DataModels.Message
 import es.usj.androidapps.alu95669.chatapp.DataModels.User
 import es.usj.androidapps.alu95669.chatapp.DataModels.UserAdapter
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -91,7 +92,12 @@ class Chat: AppCompatActivity() {
         sendButton.setOnClickListener {
             if (messageBox.text.isNotBlank()) {
                 val message = messageBox.text.toString()
-                val messageObject = Message(message, senderID)
+
+                //We define the format we want to our Date
+                val sdf = SimpleDateFormat("HH:mm")
+                val date = Date()
+
+                val messageObject = Message(message, senderID, sdf.format(date))
                 dbRef.child("messages").child(senderRoom!!).child("message").push()
                     .setValue(messageObject).addOnSuccessListener {
                         dbRef.child("messages").child(receiverRoom!!).child("message").push()
