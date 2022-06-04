@@ -54,11 +54,11 @@ class MessageAdapter(val context: Context, list: ArrayList<Message>): RecyclerVi
         if(holder.javaClass==SentViewHolder::class.java){
             //Sent view holder
             val viewHolder = holder as SentViewHolder
-            holder.sentMessage.text = currentMessage.message
+            viewHolder.sentMessage.text = currentMessage.message
 
         }else{
             val viewHolder = holder as ReceivedViewHolder
-            holder.receivedMessage.text = currentMessage.message
+            viewHolder.receivedMessage.text = currentMessage.message
         }
     }
 

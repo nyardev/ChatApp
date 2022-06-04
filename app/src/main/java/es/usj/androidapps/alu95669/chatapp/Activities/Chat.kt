@@ -109,44 +109,55 @@ class Chat: AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val llSearch = findViewById<LinearLayout>(R.id.llSearch)
+        val searchET = findViewById<EditText>(R.id.etSearchMessage)
+        val btnSearchET = findViewById<FloatingActionButton>(R.id.btnSearchET)
+
         llSearch.visibility = View.VISIBLE
         llSearch.isClickable = true
 
-        val searchET = findViewById<EditText>(R.id.etSearchMessage)
         searchET.visibility = View.VISIBLE
         searchET.isClickable = true
 
-        val btnSearchET = findViewById<FloatingActionButton>(R.id.btnSearchET)
         btnSearchET.visibility = View.VISIBLE
         btnSearchET.isClickable = true
 
         btnSearchET.setOnClickListener {
-            var messageText = searchET.text.toString()
-            var position = 0
-            var found = false
-            for(message in messageList){
-                if(!message.message?.contains(messageText)!!){
-                    position += 1
-                }else{
-                    found = true
-                    break
-                }
-            }
-            //If it did not find any match
-            if(!found){
-                Toast.makeText(this, "Message not found!", Toast.LENGTH_SHORT).show()
-            }else {
-                (messageRecyclerView.layoutManager as LinearLayoutManager).scrollToPosition(position - 1)
-            }
-            llSearch.visibility = View.INVISIBLE
-            llSearch.isClickable = false
-            llSearch.visibility = View.INVISIBLE
-            llSearch.isClickable = false
-            btnSearchET.visibility = View.INVISIBLE
-            btnSearchET.isClickable = false
+            searchMessage(searchET, llSearch, btnSearchET)
         }
         return true
     }
+
+    private fun searchMessage(
+        searchET: EditText,
+        llSearch: LinearLayout,
+        btnSearchET: FloatingActionButton
+    ) {
+        var messageText = searchET.text.toString()
+        var position = 0
+        var found = false
+
+        for (message in messageList) {
+            if (!message.message?.contains(messageText)!!) {
+                position += 1
+            } else {
+                found = true
+                break
+            }
+        }
+        //If it did not find any match
+        if (!found) {
+            Toast.makeText(this, "Message not found!", Toast.LENGTH_SHORT).show()
+        } else {
+            (messageRecyclerView.layoutManager as LinearLayoutManager).scrollToPosition(position - 1)
+        }
+        llSearch.visibility = View.INVISIBLE
+        llSearch.isClickable = false
+        llSearch.visibility = View.INVISIBLE
+        llSearch.isClickable = false
+        btnSearchET.visibility = View.INVISIBLE
+        btnSearchET.isClickable = false
+    }
+
 }
 
 

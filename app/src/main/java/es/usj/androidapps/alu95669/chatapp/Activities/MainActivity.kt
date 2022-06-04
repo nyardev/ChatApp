@@ -77,10 +77,5 @@ class MainActivity : AppCompatActivity() {
         }
             return true
     }
-    //Use this logic to get things from the database!! .child goes one level deeper in the hierarchy
-    private fun readUsername(userId: String){
-        userDBRef = FirebaseDatabase.getInstance().getReference("user")
-        userDBRef.child(userId).get().addOnSuccessListener {
-        }
-    }
+
 }
