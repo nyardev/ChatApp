@@ -1,6 +1,7 @@
 package es.usj.androidapps.alu95669.chatapp.DataModels
 
 class User {
+
     var name: String? = null
     var email: String? = null
     var userId: String? = null
