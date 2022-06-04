@@ -112,6 +112,19 @@ class Chat: AppCompatActivity() {
         val searchET = findViewById<EditText>(R.id.etSearchMessage)
         val btnSearchET = findViewById<FloatingActionButton>(R.id.btnSearchET)
 
+        appearSearchBox(llSearch, searchET, btnSearchET)
+
+        btnSearchET.setOnClickListener {
+            searchMessage(searchET, llSearch, btnSearchET)
+        }
+        return true
+    }
+
+    private fun appearSearchBox(
+        llSearch: LinearLayout,
+        searchET: EditText,
+        btnSearchET: FloatingActionButton
+    ) {
         llSearch.visibility = View.VISIBLE
         llSearch.isClickable = true
 
@@ -120,11 +133,6 @@ class Chat: AppCompatActivity() {
 
         btnSearchET.visibility = View.VISIBLE
         btnSearchET.isClickable = true
-
-        btnSearchET.setOnClickListener {
-            searchMessage(searchET, llSearch, btnSearchET)
-        }
-        return true
     }
 
     private fun searchMessage(
@@ -150,8 +158,16 @@ class Chat: AppCompatActivity() {
         } else {
             (messageRecyclerView.layoutManager as LinearLayoutManager).scrollToPosition(position - 1)
         }
-        llSearch.visibility = View.INVISIBLE
-        llSearch.isClickable = false
+        disappearSearchBox(searchET, llSearch, btnSearchET)
+    }
+
+    private fun disappearSearchBox(
+        searchET: EditText,
+        llSearch: LinearLayout,
+        btnSearchET: FloatingActionButton
+    ) {
+        searchET.visibility = View.INVISIBLE
+        searchET.isClickable = false
         llSearch.visibility = View.INVISIBLE
         llSearch.isClickable = false
         btnSearchET.visibility = View.INVISIBLE
