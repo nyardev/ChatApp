@@ -88,6 +88,6 @@ class RegisterScreen : AppCompatActivity() {
         //Linking to DB
         dbRef = FirebaseDatabase.getInstance().reference
         //Creating nodes for each user. USE THIS LOGIC TO CREATE OTHER THINGS IN THE DATABASE, TEAM
-        dbRef.child("user").child(userId).setValue(User(name, email, userId))
+        dbRef.child("user").child(userId).setValue(User(name, email, userId, mAuth.currentUser?.metadata?.lastSignInTimestamp))
     }
 }

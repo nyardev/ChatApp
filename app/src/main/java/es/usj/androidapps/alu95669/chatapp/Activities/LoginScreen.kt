@@ -11,13 +11,16 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import es.usj.androidapps.alu95669.chatapp.R
-
+import kotlin.system.measureTimeMillis
 
 
 class LoginScreen : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
+    private lateinit var userDBRef: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +28,7 @@ class LoginScreen : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
 
         supportActionBar?.hide()
-
+        userDBRef = FirebaseDatabase.getInstance().reference
         val etEmail = findViewById<EditText>(R.id.etEmail)
         val etPassword = findViewById<EditText>(R.id.etPassword)
 
@@ -56,7 +59,7 @@ class LoginScreen : AppCompatActivity() {
     }
 
     private fun login(email: String, password: String){
-        FirebaseAuth.getInstance().signOut();
+        FirebaseAuth.getInstance().signOut()
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(
                 this

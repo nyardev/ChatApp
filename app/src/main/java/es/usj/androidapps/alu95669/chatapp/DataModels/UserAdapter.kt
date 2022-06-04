@@ -11,6 +11,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import es.usj.androidapps.alu95669.chatapp.Activities.Chat
 import es.usj.androidapps.alu95669.chatapp.R
+import java.util.*
+import kotlin.collections.ArrayList
 
 class UserAdapter(val context: Context, list: ArrayList<User>): RecyclerView.Adapter<UserAdapter.UserHolder>() {
 
@@ -28,6 +30,9 @@ class UserAdapter(val context: Context, list: ArrayList<User>): RecyclerView.Ada
         fun render(user: User) {
             val name: TextView = itemView.findViewById(R.id.tvUserNameRV)
             name.text = user.name
+            val lastConnection : TextView = itemView.findViewById(R.id.tvLastConnection)
+            var date = Date(user.lastTimeConnected!!)
+            lastConnection.text = date.toLocaleString()
         }
 
     }

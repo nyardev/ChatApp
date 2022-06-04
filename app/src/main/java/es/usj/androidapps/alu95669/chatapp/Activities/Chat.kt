@@ -44,6 +44,7 @@ class Chat: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_room)
 
+
         dbRef = FirebaseDatabase.getInstance().reference
 
         val userName = intent.getStringExtra("name")

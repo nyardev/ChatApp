@@ -13,6 +13,8 @@ import com.google.firebase.database.ktx.getValue
 import es.usj.androidapps.alu95669.chatapp.DataModels.User
 import es.usj.androidapps.alu95669.chatapp.DataModels.UserAdapter
 import es.usj.androidapps.alu95669.chatapp.R
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,10 +30,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        title = "Chats"
+        var ts = FirebaseAuth.getInstance().currentUser?.metadata?.lastSignInTimestamp!!
+        var date  = Date(ts)
+        title = date.toLocaleString()
 
         mAuth = FirebaseAuth.getInstance()
         userDBRef = FirebaseDatabase.getInstance().reference
+
+        //I refresh the last connected time of the user in firebase
+        userDBRef.child("user").child(mAuth.currentUser?.uid!!)
+            .child("lastTimeConnected").setValue(ts)
 
         userList = ArrayList()
 
