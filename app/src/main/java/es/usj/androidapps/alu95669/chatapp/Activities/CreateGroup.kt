@@ -4,13 +4,11 @@ package es.usj.androidapps.alu95669.chatapp.Activities
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.CheckBox
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
@@ -27,17 +25,16 @@ class CreateGroup : AppCompatActivity() {
     private lateinit var userRecyclerView: RecyclerView
     private lateinit var userList: ArrayList<User>
     private lateinit var adapter: UserListAdapter
+    private lateinit var selectedUsers : ArrayList<User>
     private val llm2 = LinearLayoutManager(this)
-    interface Callback {
-        fun onUpdate(list: ArrayList<User>)
-    }
+    private lateinit var mapUID : Map<String?,String?>
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.create_chat_room)
-        var ts = FirebaseAuth.getInstance().currentUser?.metadata?.lastSignInTimestamp!!
+        val ts = FirebaseAuth.getInstance().currentUser?.metadata?.lastSignInTimestamp!!
         title = "Create a Group"
 
         mAuth = FirebaseAuth.getInstance()
@@ -64,6 +61,8 @@ class CreateGroup : AppCompatActivity() {
                 }
                 val userListAdapter = UserListAdapter(this@CreateGroup, userList)
                 userRecyclerView.adapter = userListAdapter
+
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -76,7 +75,8 @@ class CreateGroup : AppCompatActivity() {
         val etGroupName = findViewById<EditText>(R.id.etGroupName)
         btnCreate.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
-            addGroupToDB(etGroupName.text.toString(),etGroupName.text.toString())
+
+            addGroupToDB(etGroupName.text.toString())
             finish()
             startActivity(intent)
         }
@@ -91,11 +91,30 @@ class CreateGroup : AppCompatActivity() {
 
     }
 
-    private fun addGroupToDB(groupName: String, groupId: String){
+    private fun usersToMembers(selectedUsers : ArrayList<User> ,groupName: String){
+        var mapUID : Map<String?,String?> = mutableMapOf()
+        for(User in selectedUsers){
+            //mapUID[User.userId] = User.name
+           // arrayUIDs.add(User.userId)
+           // arrayNames.add(User.name)
+            // mapA and mapB are different maps
+           // mapUID = mapUID + (User.userId to User.name)
+
+            userDBRef.child("groups").child(groupName).child(User.userId.toString())
+        }
+        //arrayUIDs : ArrayList<String?>,arrayNames : ArrayList<String?>
+
+
+
+    }
+
+    private fun addGroupToDB(groupName: String){
         //Linking to DB
         userDBRef = FirebaseDatabase.getInstance().reference
         //Creating nodes for each group. USE THIS LOGIC TO CREATE OTHER THINGS IN THE DATABASE, TEAM
-        userDBRef.child("groups").child(groupId).setValue(groupName)
+        userDBRef.child("groups").child(groupName)
+        //Add Members Info
+        usersToMembers(userList,groupName)
     }
 
 

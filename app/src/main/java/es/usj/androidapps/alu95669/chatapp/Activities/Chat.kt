@@ -42,7 +42,7 @@ class Chat: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_room)
 
-        var ts = FirebaseAuth.getInstance().currentUser?.metadata?.lastSignInTimestamp!!
+       // var ts = FirebaseAuth.getInstance().currentUser?.metadata?.lastSignInTimestamp!!
         mAuth = FirebaseAuth.getInstance()
 
         dbRef = FirebaseDatabase.getInstance().reference

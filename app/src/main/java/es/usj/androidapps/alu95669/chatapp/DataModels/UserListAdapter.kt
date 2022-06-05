@@ -2,19 +2,16 @@ package es.usj.androidapps.alu95669.chatapp.DataModels
 
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import es.usj.androidapps.alu95669.chatapp.Activities.Chat
 import es.usj.androidapps.alu95669.chatapp.R
 import java.util.*
-import kotlin.collections.ArrayList
 
-class UserListAdapter(val context: Context, list: ArrayList<User>): RecyclerView.Adapter<UserListAdapter.UserHolder>() {
+class UserListAdapter(val context: Context, list: ArrayList<User>): RecyclerView.Adapter<UserListAdapter.UserHolder>(){
 
     var userList: ArrayList<User> = arrayListOf()
 
@@ -71,9 +68,11 @@ class UserListAdapter(val context: Context, list: ArrayList<User>): RecyclerView
         }
     }
 
-    val selectedUsers: ArrayList<User>
-        get() = selectedUserList
+
+
+
     override fun getItemCount(): Int {
         return userList.size
     }
 }
+
