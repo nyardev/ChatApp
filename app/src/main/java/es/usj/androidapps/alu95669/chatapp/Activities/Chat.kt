@@ -108,6 +108,7 @@ class Chat: AppCompatActivity() {
                             .setValue(messageObject)
                     }
                 messageBox.setText("")
+
                 val currentTime = System.currentTimeMillis()
                 //I refresh the last connected time of the user in firebase
                 dbRef.child("user").child(mAuth.currentUser?.uid!!)
