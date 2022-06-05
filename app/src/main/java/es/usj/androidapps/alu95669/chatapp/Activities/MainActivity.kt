@@ -13,8 +13,9 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
 import es.usj.androidapps.alu95669.chatapp.DataModels.User
 import es.usj.androidapps.alu95669.chatapp.DataModels.UserAdapter
+import es.usj.androidapps.alu95669.chatapp.GroupActivity.CreateGroup
+import es.usj.androidapps.alu95669.chatapp.GroupActivity.ViewGroup
 import es.usj.androidapps.alu95669.chatapp.R
-import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
@@ -24,14 +25,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var userRecyclerView: RecyclerView
     private lateinit var userList : ArrayList<User>
-    private lateinit var adapter : UserAdapter
 
     private val llm = LinearLayoutManager(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var ts = FirebaseAuth.getInstance().currentUser?.metadata?.lastSignInTimestamp!!
+        val ts = FirebaseAuth.getInstance().currentUser?.metadata?.lastSignInTimestamp!!
         title = "Chats"
 
         mAuth = FirebaseAuth.getInstance()
@@ -67,6 +67,11 @@ class MainActivity : AppCompatActivity() {
             val intentCreateGroup = Intent(this, CreateGroup::class.java)
             startActivity(intentCreateGroup)
         }
+        val btnShowGroup = findViewById<FloatingActionButton>(R.id.flbtnViewGroups)
+        btnShowGroup.setOnClickListener{
+            val intentShowGroup = Intent(this, ViewGroup::class.java)
+            startActivity(intentShowGroup)
+        }
         userRecyclerView = findViewById(R.id.rvUserList)
         userRecyclerView.layoutManager = llm
 
@@ -87,7 +92,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(loginIntent)
             return true
         }
-            return true
+        return true
     }
 
 }

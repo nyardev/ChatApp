@@ -1,5 +1,6 @@
 package es.usj.androidapps.alu95669.chatapp.Activities
 
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
@@ -14,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import es.usj.androidapps.alu95669.chatapp.R
-import kotlin.system.measureTimeMillis
 
 
 class LoginScreen : AppCompatActivity() {
@@ -22,6 +22,7 @@ class LoginScreen : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var userDBRef: DatabaseReference
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_screen)
@@ -48,7 +49,7 @@ class LoginScreen : AppCompatActivity() {
 
         val btnShow = findViewById<Button>(R.id.btnShow)
         btnShow.setOnClickListener {
-            if (btnShow.text.toString().equals("Show")) {
+            if (btnShow.text.toString() == "Show") {
                 etPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
                 btnShow.text = "Hide"
             } else {

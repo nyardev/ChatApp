@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/user_card"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/group_card"
     android:layout_margin="5dp"
     app:cardBackgroundColor="@color/app_blue"
     app:cardCornerRadius="10dp"
@@ -18,24 +18,16 @@
         android:weightSum="1">
 
         <TextView
-            android:id="@+id/tvUserNameRV"
+            android:id="@+id/tvGroupNameRV"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:text="User"
+            android:text="Group"
             android:textSize="25dp"
             android:textStyle="italic"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="16dp"></TextView>
 
-        <TextView
-            android:id="@+id/tvLastConnection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Last connection"
-            android:textSize="15dp"
-
-            android:layout_weight="0.5"></TextView>
-
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package es.usj.androidapps.alu95669.chatapp.Activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -14,12 +15,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
+import es.usj.androidapps.alu95669.chatapp.DataModels.Message
 import es.usj.androidapps.alu95669.chatapp.DataModels.MessageAdapter
 import es.usj.androidapps.alu95669.chatapp.R
-import es.usj.androidapps.alu95669.chatapp.DataModels.Message
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class Chat: AppCompatActivity() {
 
@@ -35,14 +35,14 @@ class Chat: AppCompatActivity() {
 
     private val llm = LinearLayoutManager(this)
 
-    var senderRoom: String? = null
-    var receiverRoom: String? = null
+    private var senderRoom: String? = null
+    private var receiverRoom: String? = null
 
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_room)
 
-       // var ts = FirebaseAuth.getInstance().currentUser?.metadata?.lastSignInTimestamp!!
         mAuth = FirebaseAuth.getInstance()
 
         dbRef = FirebaseDatabase.getInstance().reference
@@ -103,6 +103,7 @@ class Chat: AppCompatActivity() {
                             .setValue(messageObject)
                     }
                 messageBox.setText("")
+
                 val currentTime = System.currentTimeMillis()
                 //I refresh the last connected time of the user in firebase
                 dbRef.child("user").child(mAuth.currentUser?.uid!!)
@@ -150,7 +151,7 @@ class Chat: AppCompatActivity() {
         llSearch: LinearLayout,
         btnSearchET: FloatingActionButton
     ) {
-        var messageText = searchET.text.toString()
+        val messageText = searchET.text.toString()
         var position = 0
         var found = false
 

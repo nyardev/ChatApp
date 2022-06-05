@@ -1,5 +1,6 @@
 package es.usj.androidapps.alu95669.chatapp.Activities
 
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
@@ -15,7 +16,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import es.usj.androidapps.alu95669.chatapp.DataModels.User
 import es.usj.androidapps.alu95669.chatapp.R
-import es.usj.androidapps.alu95669.chatapp.databinding.ActivityRegisterScreenBinding
 
 
 class RegisterScreen : AppCompatActivity() {
@@ -24,12 +24,13 @@ class RegisterScreen : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var dbRef: DatabaseReference
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_screen)
-        setTitle("REGISTER Screen")
+        title = "REGISTER Screen"
 
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance()
 
         //We get the components of our layout
         val etEmail = findViewById<EditText>(R.id.etEmailRegister)
@@ -47,7 +48,7 @@ class RegisterScreen : AppCompatActivity() {
 
         val btnShow = findViewById<Button>(R.id.btnShowRegister)
         btnShow.setOnClickListener {
-            if (btnShow.text.toString().equals("Show")) {
+            if (btnShow.text.toString() == "Show") {
                 etPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
                 btnShow.text = "Hide"
             } else {
