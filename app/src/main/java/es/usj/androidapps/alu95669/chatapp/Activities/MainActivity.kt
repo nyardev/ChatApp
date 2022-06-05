@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
@@ -61,7 +62,11 @@ class MainActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
             }
         })
-
+        val btnCreateGroup = findViewById<FloatingActionButton>(R.id.flbtnCreateGroup)
+        btnCreateGroup.setOnClickListener{
+            val intentCreateGroup = Intent(this, CreateGroup::class.java)
+            startActivity(intentCreateGroup)
+        }
         userRecyclerView = findViewById(R.id.rvUserList)
         userRecyclerView.layoutManager = llm
 
@@ -82,7 +87,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(loginIntent)
             return true
         }
-            return true
+        return true
     }
 
 }

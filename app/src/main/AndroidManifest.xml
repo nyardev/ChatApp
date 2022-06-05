@@ -24,6 +24,9 @@
             android:name=".Activities.Chat"
             android:exported="false"/>
         <activity
+            android:name=".Activities.CreateGroup"
+            android:exported="false"/>
+        <activity
             android:name=".Activities.SplashScreen"
             android:theme="@style/SplashTheme"
             android:exported="true">
